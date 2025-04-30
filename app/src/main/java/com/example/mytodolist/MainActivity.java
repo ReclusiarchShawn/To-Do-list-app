@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         add.setOnClickListener(v -> {
             String taskText = addtext.getText().toString().trim();
             if (!taskText.isEmpty()) {
-                modelclass newTask = new modelclass(taskText);
+                modelclass newTask = new modelclass(taskText,"","");
                 if (db.addTask(newTask)) {
                     addtext.setText("");
                     load();
