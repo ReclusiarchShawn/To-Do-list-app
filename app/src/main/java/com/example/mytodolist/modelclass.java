@@ -10,12 +10,24 @@ public class modelclass {
     private boolean isCompleted;
     private String date;
     private String sidenote;
-
+    private boolean notificationEnabled;
+    private int notificationInterval;
     public modelclass(String text,String date,String sidenote) {
         this.text = text;
         this.date=date;
         this.sidenote=sidenote != null ? sidenote : "";
         this.isCompleted = false;
+        this.notificationEnabled = false;
+        this.notificationInterval = 15;
+    }
+    public boolean isNotificationEnabled() {
+        return notificationEnabled;
+    }
+    public void setNotificationEnabled(boolean notificationEnabled) {
+        this.notificationEnabled = notificationEnabled;
+    }
+    public int getNotificationInterval() {
+        return notificationInterval;
     }
     public String getSidenote(){
         return sidenote!=null?sidenote:"";
@@ -51,6 +63,16 @@ public class modelclass {
 
     public void setCompleted(boolean completed) {
         isCompleted = completed;
+    }
+    public void setNotificationInterval(int notificationInterval) {
+        // Ensure interval is within reasonable bounds
+        if (notificationInterval < 1) {
+            this.notificationInterval = 1; // Minimum 1 minute
+        } else if (notificationInterval > 1440) {
+            this.notificationInterval = 1440; // Maximum 24 hours
+        } else {
+            this.notificationInterval = notificationInterval;
+        }
     }
     public String getcurrentdatetime(){
         SimpleDateFormat newformat=new SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.getDefault());
